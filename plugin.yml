@@ -1,0 +1,4 @@
+name: DeathTimeout
+main: net.Zelif.DeathTimeout.DeathTimeout
+version: 0.1
+author: Zelif
