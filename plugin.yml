@@ -1,4 +1,26 @@
 name: DeathTimeout
 main: net.Zelif.DeathTimeout.DeathTimeout
-version: 0.1
+version: 0.2
 author: Zelif
+commands:
+    dt-reload:
+        description: Reloads config.
+        usage: |
+            /<command>
+                dt-reload:
+        description: Edits the seconds for the ban.
+        usage: |
+            /<command> <number>
+permissions:
+    DeathTimeout.*:
+        description: Gives access to all DeathTimeout.
+        children:
+            DeathTimeout.reload: true
+            DeathTimeout.edit: true
+        default: op
+    DeathTimeout.reload:
+        description: Allows you to reload the config.
+        default: op
+    DeathTimeout.edit:
+        description: Allows you to edit the seconds for the ban.
+        default: op
