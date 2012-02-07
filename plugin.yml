@@ -7,7 +7,7 @@ commands:
         description: Reloads config.
         usage: |
             /<command>
-                dt-reload:
+    dt-edit:
         description: Edits the seconds for the ban.
         usage: |
             /<command> <number>
