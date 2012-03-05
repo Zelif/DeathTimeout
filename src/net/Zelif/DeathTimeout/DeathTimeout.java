@@ -1,10 +1,10 @@
 package net.Zelif.DeathTimeout;
 
 import java.util.logging.Logger;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -16,9 +16,12 @@ public class DeathTimeout extends JavaPlugin
 	{
 		final FileConfiguration config = this.getConfig();
 		config.addDefault("SecondsBanned", 300);
-		new DeathTListener(this);
+		config.addDefault("Kickmsg", "You are temp banned for time");
+		config.addDefault("Kickrejoin", "You are still banned for time");		
 		config.options().copyDefaults(true);
 		saveConfig();
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(new DeathTListener(this), this);
 	}
 
 	public void onDisable()
@@ -39,7 +42,7 @@ public class DeathTimeout extends JavaPlugin
 			{   //ingame command to edit config, can also be used in console
 				int changeTime = Integer.parseInt(args[1]);
 				this.getConfig().addDefault("SecondsBanned",changeTime);
-				sender.sendMessage("Changed ban time to"+(changeTime/1000)/60+"mins "+(changeTime/1000)% 60+"sec");
+				sender.sendMessage("Changed ban time to "+(changeTime/1000)/60+"mins "+(changeTime/1000)% 60+"sec");
 				saveConfig();
 			return true;
 			}
