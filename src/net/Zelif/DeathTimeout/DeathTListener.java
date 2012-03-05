@@ -1,7 +1,6 @@
 package net.Zelif.DeathTimeout;
 
 import java.util.HashMap;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.EventHandler;
@@ -13,11 +12,10 @@ import org.bukkit.event.player.PlayerLoginEvent.Result;
 public class DeathTListener implements Listener
 {
 	public static HashMap<String, Long> BanID= new HashMap<String, Long>();
-	public int banTime = 1;
-	public DeathTListener(DeathTimeout plugin)
+	DeathTimeout plugin;
+	public DeathTListener(DeathTimeout instance)
 	{
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
-    	banTime = plugin.getConfig().getInt("SecondsBanned");
+		plugin = instance;
     }
 
 	public boolean checkBan(PlayerLoginEvent event , Player p )
@@ -33,7 +31,9 @@ public class DeathTListener implements Listener
 			}
 			else
 			{
-				event.setKickMessage("You are still banned for "+(diff/1000)/60+"mins "+(diff/1000)% 60+"sec");
+				String caltime = ((diff/1000)/60+"mins "+(diff/1000)% 60+"sec");
+				String timeleft = plugin.getConfig().getString("Kickrejoin").replace("time", caltime);
+				event.setKickMessage(timeleft);
 				return true;
 			}	
 		}
@@ -60,12 +60,15 @@ public class DeathTListener implements Listener
     @EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDeathEvent(EntityDeathEvent event)
     {
+    	int banTime = plugin.getConfig().getInt("SecondsBanned");
     	if (event.getEntity() instanceof Player)
     	{
     		Player pl = (Player)event.getEntity();		
     		long tempT1 = System.currentTimeMillis()+(banTime*1000);
     		BanID.put(pl.getName().toLowerCase(),tempT1);
-    		pl.kickPlayer("You are temp banned for "+banTime/60+"mins "+banTime%60+"sec");
+    		String timecal = (banTime/60+"mins "+banTime%60+"sec");
+        	String timevar = plugin.getConfig().getString("Kickmsg").replace("time", timecal );
+    		pl.kickPlayer(timevar);
     	}
     }
 }
