@@ -1,6 +1,6 @@
 name: DeathTimeout
 main: net.Zelif.DeathTimeout.DeathTimeout
-version: 0.2
+version: 0.4
 author: Zelif
 commands:
     dt-reload:
@@ -24,3 +24,6 @@ permissions:
     DeathTimeout.edit:
         description: Allows you to edit the seconds for the ban.
         default: op
+    deathtimeout.bypass:
+        description: Allows you to bypass the ban.
+        default: false
