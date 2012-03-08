@@ -37,7 +37,7 @@ public class DeathTListener implements Listener
 				return true;
 			}	
 		}
-		return false;		
+		return false;
 	}
 			
     @EventHandler(priority = EventPriority.HIGH)
@@ -60,15 +60,18 @@ public class DeathTListener implements Listener
     @EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDeathEvent(EntityDeathEvent event)
     {
-    	int banTime = plugin.getConfig().getInt("SecondsBanned");
     	if (event.getEntity() instanceof Player)
     	{
-    		Player pl = (Player)event.getEntity();		
-    		long tempT1 = System.currentTimeMillis()+(banTime*1000);
-    		BanID.put(pl.getName().toLowerCase(),tempT1);
-    		String timecal = (banTime/60+"mins "+banTime%60+"sec");
-        	String timevar = plugin.getConfig().getString("Kickmsg").replace("time", timecal );
-    		pl.kickPlayer(timevar);
+    		Player pl = (Player)event.getEntity();
+    		if(!(pl.hasPermission("deathtimeout.bypass"))){ 									//bypass the ban if user has this node
+    	    	pl.getInventory().clear();												//Removes all inventory items ;D
+    			int banTime = plugin.getConfig().getInt("SecondsBanned");							//Grabs the amount of seconds to be banned from config
+    			long tempT1 = System.currentTimeMillis()+(banTime*1000); 							//Finds the current time in milliseconds
+    			BanID.put(pl.getName().toLowerCase(),tempT1); 									//Uses a hashmap with the time from tempT1
+    			String timecal = (banTime/60+"mins "+banTime%60+"sec"); 							//Calculates the mins and seconds and sets to a string
+    			String timevar = plugin.getConfig().getString("Kickmsg").replace("time", timecal ); 				//Replaces the word time with the timecal variable
+    			pl.kickPlayer(timevar); 											//kicks player with the msg from timeval
+    		}
     	}
     }
 }
