@@ -1,6 +1,6 @@
 name: DeathTimeout
 main: net.Zelif.DeathTimeout.DeathTimeout
-version: 0.4
+version: 0.5.5
 author: Zelif
 commands:
     dt-reload:
@@ -11,18 +11,34 @@ commands:
         description: Edits the seconds for the ban.
         usage: |
             /<command> <number>
+    dt-unban:
+        description: Unbans a player.
+        usage: |
+            /<command> <PlayerName>
+    dt-list:
+        description: Lists banned players.
+        usage: |
+            /<command>
 permissions:
     DeathTimeout.*:
         description: Gives access to all DeathTimeout.
         children:
             DeathTimeout.reload: true
             DeathTimeout.edit: true
+            DeathTimeout.unban: true
+            DeathTimeout.list: true
         default: op
     DeathTimeout.reload:
         description: Allows you to reload the config.
         default: op
     DeathTimeout.edit:
         description: Allows you to edit the seconds for the ban.
+        default: op
+    DeathTimeout.unban:
+        description: Allows you to unban a player.
+        default: op
+    DeathTimeout.list:
+        description: Allows you to list banned players.
         default: op
     deathtimeout.bypass:
         description: Allows you to bypass the ban.
