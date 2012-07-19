@@ -1,7 +1,8 @@
-First version of DeathTimeout.
+DeathTimeout
 
 After a player dies they are kicked from the server.
 They cannot join the server untill the ban has gone
 for the selected amount of time.(Configurable it is in seconds)
 
-Most of this plugin is the work of the maker of Tempban -InfiniteMinecraft
+Thanks to the maker of Tempban InfiniteMinecraft without your plugin
+I could not have got my head around using hashmaps ;D
