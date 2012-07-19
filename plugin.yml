@@ -1,6 +1,6 @@
 name: DeathTimeout
-main: net.Zelif.DeathTimeout.DeathTimeout
-version: 0.5.5
+main: net.zelif.DeathTimeout.DeathTimeout
+version: 0.7
 author: Zelif
 commands:
     dt-reload:
