@@ -36,7 +36,7 @@ public class DeathTListener implements Listener
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onEntityDeathEvent(EntityDeathEvent event)
    	{
-    	if (event.getEntity() instanceof Player)
+    	if (event.getEntity() instanceof Player)  //only gathers a players death
     	{    		
 			Player p = (Player)event.getEntity();
     		if(!(p.hasPermission("deathtimeout.bypass"))) 		//bypass the ban if user has this node
